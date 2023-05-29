@@ -46,7 +46,7 @@
   ### *輸入評價會出現微軟的分析的中文結果(正向的、負向的、中立)+信心指數*
   #### *此部分有參考乃云助教的程式碼*
  # 第三部分:回傳評價主詞  
- ![hw4第三部分]()  
+ ![hw4第三部分](https://github.com/rin693350/LAT/blob/e61bbb9612397f8c5b759c73d31ef458125c2596/%E4%BD%9C%E6%A5%AD%E5%9B%9B%E7%AC%AC%E4%B8%89%E9%83%A8%E5%88%86.png)  
  async function MS_TextSentimentAnalysis(thisEvent){  
  console.log("[MS_TextSentimentAnalysis] in");  
  const analyticsClient = new TextAnalyticsClient(endpoint, new AzureKeyCredential(apiKey));  
@@ -55,10 +55,13 @@
  const results = await analyticsClient.analyzeSentiment(documents, "zh-Hant", { includeOpinionMining: true });  
  console.log("[results]", JSON.stringify(results));  
  const point = results[0].confidenceScores;  
+ //和第二部分一樣抓信心指數
  const sentiment = results[0].sentiment;  
  const pointText = `（正面：${point.positive.toFixed(2)}、負面：${point.negative.toFixed(2)}、中立：${point.neutral.toFixed(2)}）`;  
  let replyText = '';  
- if (sentiment === 'positive') {  
+ if (sentiment === 'positive') {
+    //抓主詞位置(一長串的那個東東)
+    //設定if迴圈，根據評價情緒不同給予不同回饋
      if (results[0].sentences[0].opinions && results[0].sentences[0].opinions.length > 0) {  
          replyText = `非常高興您對於本店的${results[0].sentences[0].opinions[0].target.text}有好評價，歡迎下次再來喔!。`;  
     } else {  
@@ -82,6 +85,8 @@
     
   return client.replyMessage(thisEvent.replyToken, echo);  
 }  
+### *輸入評價會出現信心指數+回饋文字*
+#### *此部分有參考乃云助教的程式碼*
 
 
   
