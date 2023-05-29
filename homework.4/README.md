@@ -1,12 +1,20 @@
-# LAT
-111-2 臺師大教育大數據微學程
-課名:學習分析工具物應用
-授課老師:蔡芸琤
-姓名:鍾承芳
-系級:地理系113級
-課程筆記區  
-作業連結區:作業一(https://github.com/rin693350/LAT/blob/main/%E4%BD%9C%E6%A5%AD%E4%B8%80.ipynb) 
-
-作業二(https://github.com/rin693350/LAT/blob/main/HOMEWORK2.ipynb)
-   
-   專題連結區
+# 飯店機器人
+## 分成三階段:  
+1.會回應評價所含情緒:positive、negative、netural  
+2.會回傳評價所含情緒(中文)+信心指數  
+3.會抓出評價主詞  
+# 第一部分:回傳positive、negative、netural  
+![hw4第一部分]()  
+    async function MS_TextSentimentAnalysis(thisEvent){  
+    console.log("[MS_TextSentimentAnalysis] in");  
+    const analyticsClient = new TextAnalyticsClient(endpoint, new AzureKeyCredential(apiKey));  
+    let documents = [];  
+    documents.push(thisEvent.message.text);  
+    const results = await analyticsClient.analyzeSentiment(documents);  
+    console.log("[results] ", JSON.stringify(results));  
+    const resultMessage = {  
+      type: 'text',  
+      text: results[0].sentiment  
+      };  
+      client.replyMessage(thisEvent.replyToken, {type:"text",text:results[0].sentiment})  
+     }  
