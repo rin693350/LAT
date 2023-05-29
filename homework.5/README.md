@@ -1,11 +1,31 @@
-# LAT
-## 111-2 臺師大教育大數據微學程  
-### 課名:學習分析工具與應用  
-授課老師:蔡芸琤  
-姓名:鍾承芳  
-系級:地理系113級  
-課程筆記區  
-作業連結區:作業一(https://github.com/rin693350/LAT/blob/main/%E4%BD%9C%E6%A5%AD%E4%B8%80.ipynb)  
-作業二(https://github.com/rin693350/LAT/blob/main/HOMEWORK2.ipynb)  
-作業四(https://github.com/rin693350/LAT/tree/9b78dd8f117c29bc033b03e146ea847a3b1e5268/homework.4)  
-專題連結區
+# 作業五:圖片辨識
+## 主題:地標照片辨識
+### 目的:使學生能簡單把網址或圖片丟入分析網站，而後顯示地標名稱和信心指數，信心指數能幫助學生判讀結果是否值得相信。  
+#### 使用範例:  
+![hw5-1](https://github.com/rin693350/LAT/blob/7e30710d813d626f2e0975f318748fccbdc0a44c/hw5_1.jpg)  
+##### *放入艾菲爾鐵塔的圖片，圖說顯示出艾菲爾鐵塔和信心值* 
+#### 使用範例二:  
+![hw5-2](https://github.com/rin693350/LAT/blob/8afcece95c0e89405d6ab0d631cee3cd96752f2a/hw5_2.jpg)  
+##### *放入倫敦大笨鐘的圖片，但圖說並沒有顯示出大笨鐘*
+### 困難:原以為信心值會和結果準不準確有關，但以上面兩個例子來看兩者之間似乎並無關聯  
+### 有修改的程式碼  
+.done(function (data) {  
+            //顯示JSON內容  
+            $("#responseTextArea").val(JSON.stringify(data, null, 2));  
+            $("#picDescription").empty();    
+            $("#picDescription").append(data.description.captions[0].text +"<br>");  
+            //抓出信心指數並顯示  
+            $("#picDescription").append("信心指數為" + data.description.captions[0].confidence);  
+            // $("#picDescription").append("這裡有"+data.faces.length+"個人");  
+            })  
+            
+var params = {  
+         "visualFeatures": "Objects,Categories,Description",  
+         //將地標添加到細節裡  
+         "details": "Landmarks",  
+         "maxCandidates": "1",  
+        "language": "zh",  
+    };  
+    
+
+
