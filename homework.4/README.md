@@ -19,4 +19,5 @@
       client.replyMessage(thisEvent.replyToken, {type:"text",text:results[0].sentiment})  
      }  
 ### *輸入評價會出現微軟的分析(positive、negative、netural)*  
-# 第二部分:回傳中文分析結果+信心指數  
+# 第二部分:回傳中文分析結果+信心指數   
+![hw4第二部分]()
